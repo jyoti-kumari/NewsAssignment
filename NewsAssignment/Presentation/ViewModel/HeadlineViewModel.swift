@@ -10,14 +10,11 @@ import Foundation
 protocol HeadlinesViewModelProtocol: ObservableObject {
     func getHeadlines()
     var headlines: [HeadlineData] { get }
-    var errorMessage: String { get }
     var title: String { get }
 }
 
 class HeadlineViewModel: HeadlinesViewModelProtocol {
-    
     @Published var headlines: [HeadlineData] = []
-    var errorMessage: String = ""
     var title: String = StringConstant.title
     
     // MARK: - Dependencies
@@ -37,6 +34,7 @@ class HeadlineViewModel: HeadlinesViewModelProtocol {
                 self?.headlines = data
             }
             .catch() { error in
+                print(error.localizedDescription)
             }
     }
 }
